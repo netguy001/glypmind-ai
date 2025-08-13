@@ -1,0 +1,51 @@
+name: Deploy to Render.com
+
+on:
+  push:
+    branches: [ main ]
+    paths: 
+      - 'backend/**'
+  workflow_dispatch:
+
+jobs:
+  notify-render:
+    name: Notify Render of Changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Notify Render Deploy (Optional)
+        run: |
+          echo "🚀 Backend changes detected in commit ${{ github.sha }}"
+          echo "📁 Files changed in backend/ directory"
+          echo "🔄 Render will automatically deploy if connected to this repository"
+          echo "💡 If auto-deploy is disabled, manually trigger deploy in Render dashboard"
+          
+      - name: Validate Backend Structure
+        run: |
+          echo "🔍 Validating backend structure..."
+          
+          # Check required files exist
+          if [ ! -f "backend/requirements-minimal.txt" ]; then
+            echo "❌ Missing backend/requirements-minimal.txt"
+            exit 1
+          fi
+          
+          if [ ! -f "backend/render_start.py" ]; then
+            echo "❌ Missing backend/render_start.py"
+            exit 1
+          fi
+          
+          if [ ! -f "backend/Procfile" ]; then
+            echo "❌ Missing backend/Procfile"
+            exit 1
+          fi
+          
+          if [ ! -f "backend/.python-version" ]; then
+            echo "❌ Missing backend/.python-version"
+            exit 1
+          fi
+          
+          echo "✅ All required files present"
+          echo "✅ Backend structure is valid for Render deployment"

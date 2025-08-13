@@ -1,30 +1,32 @@
-name: Deploy GlyphMind AI
+name: Deploy GlyphMind AI (DISABLED - Use Render.com Direct Integration)
+
+# Disabled workflow - Deploy directly through Render.com GitHub integration
+# See RENDER_SETUP_GUIDE.md for setup instructions
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+  # Disabled - uncomment to re-enable
+  # push:
+  #   branches: [ main ]
+  # workflow_dispatch:
 
 jobs:
   deploy-backend:
-    name: Deploy Backend to Railway
+    name: Deploy Backend to Render
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Railway CLI
-        run: |
-          curl -fsSL https://railway.app/install.sh | sh
-          echo "$HOME/.railway/bin" >> $GITHUB_PATH
-
-      - name: Deploy to Railway
+      - name: Trigger Render Deploy
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
         run: |
-          cd backend
-          railway login --token $RAILWAY_TOKEN
-          railway up --service backend
+          curl -X POST \
+            "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys" \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"clearCache": false}'
 
   deploy-frontend:
     name: Deploy Frontend to Hugging Face Spaces
@@ -82,7 +84,7 @@ jobs:
         if: needs.deploy-backend.result == 'success' && needs.deploy-frontend.result == 'success'
         run: |
           echo "✅ Both backend and frontend deployed successfully!"
-          echo "Backend: Railway"
+          echo "Backend: Render.com"
           echo "Frontend: Hugging Face Spaces"
 
       - name: Deployment Failed
