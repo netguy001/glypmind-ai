@@ -1,0 +1,18 @@
+# Minimal GlyphMind AI Backend Requirements for Render.com
+# Ultra-minimal to avoid build issues on free tier
+
+# Core FastAPI stack (pre-compiled wheels available)
+fastapi
+uvicorn[standard]
+pydantic
+
+# HTTP clients (essential for web intelligence)
+aiohttp
+requests
+beautifulsoup4
+
+# Database (lightweight)
+aiosqlite
+
+# Configuration
+python-dotenv

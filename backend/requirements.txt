@@ -1,23 +1,25 @@
 # GlyphMind AI Backend Requirements - Optimized for Render.com
-# Core Dependencies (Essential)
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-pydantic==2.5.0
+# Compatible with Python 3.13+ and Render's build environment
+
+# Core Dependencies (Essential) - Using latest compatible versions
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.6.0
 
 # Web Intelligence & HTTP (Essential for web search)
-aiohttp==3.9.0
-requests==2.31.0
-beautifulsoup4==4.12.0
+aiohttp>=3.9.3
+requests>=2.31.0
+beautifulsoup4>=4.12.0
 
 # Database & Storage (Essential for persistence)
-aiosqlite==0.20.0
+aiosqlite>=0.20.0
 
 # System utilities (Essential for deployment)
-python-dotenv==1.0.0
+python-dotenv>=1.0.0
 
 # Optional - Only install if needed (comment out to save memory)
-# httpx>=0.25.0  # Alternative HTTP client
-# numpy>=1.24.0  # Only if using ML features
+# httpx>=0.26.0  # Alternative HTTP client
+# numpy>=1.26.0  # Only if using ML features
 # asyncio-throttle>=1.0.2  # Only if using rate limiting
 # python-json-logger>=2.0.7  # Only if using structured logging
 # psutil>=5.9.0  # Only if monitoring system resources

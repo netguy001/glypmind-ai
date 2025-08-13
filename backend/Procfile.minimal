@@ -1,0 +1,3 @@
+# Minimal Procfile for Render.com deployment
+# Use this if the main Procfile has build issues
+web: pip install --upgrade pip && pip install -r requirements-minimal.txt && python render_start.py

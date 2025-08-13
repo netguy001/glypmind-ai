@@ -25,7 +25,12 @@
 - **Root Directory**: `backend` (important!)
 
 **Build & Deploy:**
-- **Build Command**: `pip install -r requirements.txt`
+- **Python Runtime**: `3.11.9` (recommended for stability)
+- **Build Command**: `pip install --upgrade pip && pip install -r requirements-minimal.txt`
+- **Start Command**: `python render_start.py`
+
+**Alternative (if build fails):**
+- **Build Command**: `pip install --upgrade pip && pip install fastapi uvicorn[standard] pydantic aiohttp requests beautifulsoup4 aiosqlite python-dotenv`
 - **Start Command**: `python render_start.py`
 
 ### Step 3: Configure Environment Variables
@@ -105,12 +110,28 @@ Add these environment variables in Render dashboard:
 
 ### Common Issues
 
-#### 1. Build Failures
-**Problem**: `pip install` fails
+#### 1. Build Failures (Most Common)
+
+**Problem A**: `pydantic-core` Rust compilation error
+```
+error: failed to create directory `/usr/local/cargo/registry/cache/`
+Caused by: Read-only file system (os error 30)
+```
+**Solution**: 
+- Use `requirements-minimal.txt` instead: `pip install -r requirements-minimal.txt`
+- Or use direct install: `pip install fastapi uvicorn[standard] pydantic aiohttp requests beautifulsoup4 aiosqlite python-dotenv`
+- Set Python version to 3.11.9 in Render settings
+
+**Problem B**: Python 3.13 compatibility issues
+**Solution**:
+- Add `.python-version` file with `3.11.9`
+- Or set in Render dashboard: Environment → Python Version → `3.11.9`
+
+**Problem C**: General pip install fails
 **Solution**: 
 - Check `requirements.txt` for invalid packages
-- Verify Python version compatibility
-- Check build logs for specific errors
+- Try upgrading pip first: `pip install --upgrade pip && pip install -r requirements.txt`
+- Use minimal requirements for debugging
 
 #### 2. App Won't Start
 **Problem**: Service fails to start
