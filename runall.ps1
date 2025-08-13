@@ -95,7 +95,7 @@ Write-Host ""
 
 # Start backend server
 Write-Host "🔧 Starting FastAPI Backend..." -ForegroundColor Yellow
-$backendProcess = Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PWD'; python server/app.py" -PassThru
+$backendProcess = Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PWD'; python -m uvicorn server.app:app --host 127.0.0.1 --port 8000 --reload" -PassThru
 Write-Host "   Backend PID: $($backendProcess.Id)" -ForegroundColor Gray
 
 # Wait a moment for backend to start

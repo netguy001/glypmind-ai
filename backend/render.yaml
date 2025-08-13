@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: glyphmind-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python render_start.py
+    plan: free
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DATA_DIR
+        value: /opt/render/project/src/data
+      - key: LOG_LEVEL
+        value: info
+      # Add your API keys as environment variables in Render dashboard:
+      # - GOOGLE_SEARCH_API_KEY
+      # - GOOGLE_SEARCH_ENGINE_ID  
+      # - YOUTUBE_API_KEY
+      # - OPENAI_API_KEY
+      # - ANTHROPIC_API_KEY
+      # - ALLOWED_ORIGINS (comma-separated list of frontend URLs)

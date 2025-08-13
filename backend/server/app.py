@@ -159,11 +159,30 @@ app = FastAPI(
 )
 
 # Add middleware
+# Get allowed origins from environment or use defaults
+import os
+ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "").split(",") if os.environ.get("ALLOWED_ORIGINS") else []
+
+# Default allowed origins for development and common deployments
+default_origins = [
+    "https://*.hf.space",
+    "https://huggingface.co", 
+    "http://localhost:7860",
+    "http://127.0.0.1:7860",
+]
+
+# Add environment-specified origins
+all_origins = default_origins + ALLOWED_ORIGINS
+
+# Add wildcard for development (remove in production)
+if os.environ.get("ENVIRONMENT", "development") == "development":
+    all_origins.append("*")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify exact origins
+    allow_origins=all_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -526,8 +545,24 @@ async def status_endpoint(
 
 @app.get("/health")
 async def health_check():
-    """Simple health check endpoint"""
-    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+    """Simple health check endpoint for Render.com"""
+    return {
+        "status": "healthy", 
+        "timestamp": datetime.now().isoformat(),
+        "environment": os.environ.get("ENVIRONMENT", "development"),
+        "port": os.environ.get("PORT", "8000"),
+        "data_dir": os.environ.get("DATA_DIR", "data")
+    }
+
+@app.get("/")
+async def root():
+    """Root endpoint"""
+    return {
+        "message": "🧠 GlyphMind AI Backend",
+        "status": "running",
+        "docs": "/docs",
+        "health": "/health"
+    }
 
 # Legacy endpoint for backward compatibility
 @app.post("/chat-simple")
@@ -541,12 +576,19 @@ async def chat_simple(request: ChatRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
-    config = get_config()
+    import os
+    
+    # Get port from environment variable (required for Render.com)
+    port = int(os.environ.get("PORT", 8000))
+    host = os.environ.get("HOST", "0.0.0.0")
+    log_level = os.environ.get("LOG_LEVEL", "info")
+    
+    print(f"🚀 Starting GlyphMind AI Backend on {host}:{port}")
+    print(f"📊 Log level: {log_level}")
+    
     uvicorn.run(
         "server.app:app",
-        host=config.server.host,
-        port=config.server.port,
-        reload=config.server.reload,
-        log_level=config.server.log_level,
-        workers=config.server.workers
+        host=host,
+        port=port,
+        log_level=log_level
     )

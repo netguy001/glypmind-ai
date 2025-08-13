@@ -38,32 +38,67 @@ GlyphMind AI is an advanced, modular AI assistant that combines local intelligen
 
 ## 🏗️ Architecture
 
+### Split Deployment Structure
+
 ```
 glyphmind/
-├── 🧠 core/              # AI reasoning engine & model abstraction
-├── 🌐 web_intel/         # Web scraping & API integration
-├── 📚 knowledge_base/    # Persistent knowledge storage
-├── 🧬 evolution_engine/  # Background learning system
-├── 🚦 router/            # Request routing & load balancing
-├── 📊 ledger/            # Audit trails & transaction logs
-├── ⚙️  config/           # Configuration management
-├── 📝 logs/              # Comprehensive logging system
-├── 🎭 glyphs/            # Specialized AI personas
-├── 💾 cache/             # Request & response caching
-├── 📁 data/              # Raw & processed data storage
-├── 🖥️  server/           # FastAPI backend
-├── 🎨 ui/                # Gradio frontend
-└── 🚀 main.py            # Main entry point
+├── 📁 backend/           # Railway Backend Deployment
+│   ├── 🧠 core/         # AI reasoning engine & model abstraction
+│   ├── 🌐 web_intel/    # Web scraping & API integration
+│   ├── 📚 knowledge_base/ # Persistent knowledge storage
+│   ├── 🧬 evolution_engine/ # Background learning system
+│   ├── 🚦 router/       # Request routing & load balancing
+│   ├── 📊 ledger/       # Audit trails & transaction logs
+│   ├── ⚙️  config/      # Configuration management
+│   ├── 📝 logs/         # Comprehensive logging system
+│   ├── 🎭 glyphs/       # Specialized AI personas
+│   ├── 💾 cache/        # Request & response caching
+│   ├── 📁 data/         # Raw & processed data storage
+│   ├── 🖥️  server/      # FastAPI backend
+│   ├── 📋 requirements.txt # Backend dependencies
+│   ├── 🚀 Procfile      # Railway deployment config
+│   ├── ⚙️  railway.json # Railway service config
+│   └── 🏃 start.sh      # Startup script
+│
+├── 📁 frontend/         # Hugging Face Spaces Deployment
+│   ├── 🎨 app.py       # Main Gradio UI (HF Spaces entry point)
+│   ├── 📋 requirements.txt # Frontend dependencies
+│   └── 🏃 run_local.py # Local development script
+│
+├── 📁 .github/workflows/ # CI/CD Pipeline
+│   └── 🚀 deploy.yml   # Auto-deployment workflow
+│
+└── 📚 README.md        # Documentation
 ```
 
-## 🚀 Quick Start
+### Component Communication
 
-### Prerequisites
-- **Python 3.10+** (recommended: 3.11)
-- **Git** for cloning the repository
-- **PowerShell** (Windows) or **Bash** (Linux/Mac)
+```mermaid
+graph TB
+    A[User Browser] --> B[Hugging Face Spaces<br/>Gradio Frontend]
+    B --> C[Railway Backend<br/>FastAPI API]
+    C --> D[AI Engine]
+    C --> E[Web Intelligence]
+    C --> F[Knowledge Base]
+    C --> G[Evolution Engine]
+    
+    H[GitHub Push] --> I[GitHub Actions]
+    I --> J[Deploy to Railway]
+    I --> K[Deploy to HF Spaces]
+```
 
-### Installation
+## 🚀 Deployment Options
+
+GlyphMind AI supports multiple deployment configurations:
+
+### 🌐 **Production Deployment (Recommended)**
+
+**Split deployment with automatic CI/CD:**
+- **Backend**: Railway (FastAPI API)
+- **Frontend**: Hugging Face Spaces (Gradio UI)
+- **CI/CD**: GitHub Actions (auto-deploy on push)
+
+#### Setup Steps:
 
 1. **Clone the repository**
    ```bash
@@ -71,36 +106,45 @@ glyphmind/
    cd glyphmind
    ```
 
-2. **Run the launcher script**
-   ```powershell
-   # Windows PowerShell
-   .\runall.ps1
-   ```
-   
-   ```bash
-   # Linux/Mac (create bash equivalent)
-   chmod +x runall.sh && ./runall.sh
-   ```
+2. **Deploy Backend to Railway**
+   - Create account at [Railway.app](https://railway.app)
+   - Connect your GitHub repository
+   - Deploy the `/backend` folder
+   - Note your Railway backend URL
 
-3. **Access the interfaces**
-   - **Frontend UI**: http://127.0.0.1:7860
-   - **Backend API**: http://127.0.0.1:8000
-   - **API Documentation**: http://127.0.0.1:8000/docs
+3. **Deploy Frontend to Hugging Face Spaces**
+   - Create account at [Hugging Face](https://huggingface.co)
+   - Create a new Space (Gradio SDK)
+   - Set environment variable: `BACKEND_URL=https://your-backend.railway.app`
+   - Upload the `/frontend` folder contents
 
-### Manual Installation
+4. **Setup GitHub Actions (Optional)**
+   - Add repository secrets:
+     - `RAILWAY_TOKEN`: Your Railway API token
+     - `HF_TOKEN`: Your Hugging Face token
+     - `HF_USERNAME`: Your HF username
+     - `HF_SPACE_NAME`: Your HF space name
+     - `BACKEND_URL`: Your Railway backend URL
+   - Push to main branch triggers auto-deployment
 
-If you prefer manual setup:
+### 🏠 **Local Development**
+
+For local testing and development:
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
+# Terminal 1: Start Backend
+cd backend
+python run_local.py
 
-# Start backend (Terminal 1)
-python server/app.py
-
-# Start frontend (Terminal 2)
-python ui/ui.py
+# Terminal 2: Start Frontend
+cd frontend
+python run_local.py
 ```
+
+**Access Points:**
+- **Frontend UI**: http://127.0.0.1:7860
+- **Backend API**: http://127.0.0.1:8000
+- **API Documentation**: http://127.0.0.1:8000/docs
 
 ## ⚙️ Configuration
 

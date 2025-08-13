@@ -1070,3 +1070,7 @@
 2025-08-13 12:54:02,986 - glyphmind.main - INFO - Response generated using primary model: local_llm
 2025-08-13 12:54:09,882 - glyphmind.main - INFO - Performance | {"operation": "local_llm_generation", "execution_time_ms": 0.0, "timestamp": "2025-08-13T12:54:09.882509"}
 2025-08-13 12:54:09,882 - glyphmind.main - INFO - Response generated using primary model: local_llm
+2025-08-13 13:46:18,773 - glyphmind.main - INFO - Registered handler: handle_chat
+2025-08-13 13:46:18,773 - glyphmind.main - INFO - Registered handler: handle_search
+2025-08-13 13:46:18,773 - glyphmind.main - INFO - Registered handler: handle_knowledge
+2025-08-13 13:46:18,773 - glyphmind.main - INFO - Registered handler: handle_status
