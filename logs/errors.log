@@ -1,0 +1,12 @@
+2025-08-13 12:36:22,677 - glyphmind.error - ERROR - Failed to initialize OpenAI model | Exception: name 'log_warning' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Public\ALL WORKING MODELS HERE\NEW MODEL FOR DEV\GLYPHMIND\glyphmind\core\ai_engine.py", line 160, in initialize
+    log_warning("OpenAI API key not configured")
+    ^^^^^^^^^^^
+NameError: name 'log_warning' is not defined
+2025-08-13 12:36:40,677 - glyphmind.error - ERROR - Failed to initialize OpenAI model | Exception: name 'log_warning' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Public\ALL WORKING MODELS HERE\NEW MODEL FOR DEV\GLYPHMIND\glyphmind\core\ai_engine.py", line 160, in initialize
+    log_warning("OpenAI API key not configured")
+    ^^^^^^^^^^^
+NameError: name 'log_warning' is not defined

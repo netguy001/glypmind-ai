@@ -1,0 +1,30 @@
+2025-08-13 12:36:22,571 - glyphmind.main - INFO - System integration test started
+2025-08-13 12:36:22,574 - glyphmind.main - INFO - Initializing AI Engine
+2025-08-13 12:36:22,574 - glyphmind.main - INFO - Initializing local LLM model from core/tlc_model
+2025-08-13 12:36:22,676 - glyphmind.main - INFO - Local LLM model initialized successfully
+2025-08-13 12:36:22,678 - glyphmind.main - INFO - AI Engine initialized with 1 models
+2025-08-13 12:36:22,679 - glyphmind.main - INFO - Performance | {"operation": "local_llm_generation", "execution_time_ms": 0.01, "timestamp": "2025-08-13T12:36:22.679012"}
+2025-08-13 12:36:22,679 - glyphmind.main - INFO - Response generated using primary model: local_llm
+2025-08-13 12:36:23,447 - glyphmind.main - INFO - Initializing Web Intelligence module
+2025-08-13 12:36:23,447 - glyphmind.main - WARNING - Google Search API credentials not configured
+2025-08-13 12:36:23,447 - glyphmind.main - WARNING - YouTube API key not configured
+2025-08-13 12:36:23,447 - glyphmind.main - INFO - Reddit source initialized
+2025-08-13 12:36:23,447 - glyphmind.main - INFO - Web Intelligence initialized with 1 sources
+2025-08-13 12:36:40,569 - glyphmind.main - INFO - System integration test started
+2025-08-13 12:36:40,572 - glyphmind.main - INFO - Initializing AI Engine
+2025-08-13 12:36:40,572 - glyphmind.main - INFO - Initializing local LLM model from core/tlc_model
+2025-08-13 12:36:40,676 - glyphmind.main - INFO - Local LLM model initialized successfully
+2025-08-13 12:36:40,678 - glyphmind.main - INFO - AI Engine initialized with 1 models
+2025-08-13 12:36:40,678 - glyphmind.main - INFO - Performance | {"operation": "local_llm_generation", "execution_time_ms": 0.01, "timestamp": "2025-08-13T12:36:40.678663"}
+2025-08-13 12:36:40,678 - glyphmind.main - INFO - Response generated using primary model: local_llm
+2025-08-13 12:36:40,793 - glyphmind.main - INFO - Initializing Knowledge Manager
+2025-08-13 12:36:40,830 - glyphmind.main - INFO - SQLite knowledge store initialized: knowledge_base\kb.sqlite
+2025-08-13 12:36:40,830 - glyphmind.main - INFO - Knowledge Manager initialized successfully
+2025-08-13 12:36:41,098 - glyphmind.main - INFO - Initializing Web Intelligence module
+2025-08-13 12:36:41,098 - glyphmind.main - WARNING - Google Search API credentials not configured
+2025-08-13 12:36:41,098 - glyphmind.main - WARNING - YouTube API key not configured
+2025-08-13 12:36:41,098 - glyphmind.main - INFO - Reddit source initialized
+2025-08-13 12:36:41,098 - glyphmind.main - INFO - Web Intelligence initialized with 1 sources
+2025-08-13 12:36:41,101 - glyphmind.main - INFO - Initializing Evolution Engine
+2025-08-13 12:36:41,101 - glyphmind.main - INFO - Evolution Engine initialized with 6 learning topics
+2025-08-13 12:36:41,141 - glyphmind.main - INFO - Ledger manager initialized: ledger\ledger.sqlite
